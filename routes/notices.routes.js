@@ -4,9 +4,11 @@ const { NoticeModel } = require("../models/notices.models");
 
 const noticeRouter = express.Router();
 
-noticeRouter.get("/", authorization, (req, res) => {
+noticeRouter.get("/", authorization, async (req, res) => {
   const userID = req.userID;
-  res.json({ message: "Hi inside from notice", userID });
+  // res.json({ message: "Hi inside from notice", userID });
+  const data = await NoticeModel.find();
+  res.send(data);
 });
 
 noticeRouter.get("/user", authorization, async (req, res) => {
